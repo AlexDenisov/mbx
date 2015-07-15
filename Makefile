@@ -19,9 +19,18 @@ dump_swift_structs:
 	swiftc -dump-ast swift_ast.swift 2> swift.ast
 	ruby dump_swift_struct.rb
 
+TOOLCHAIN_LIB=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/
+dump_objc_classes:
+	clang dump_objc_classes.c -o dump_objc \
+					-lclang -L$(TOOLCHAIN_LIB) \
+					-Xlinker -rpath -Xlinker $(TOOLCHAIN_LIB)\
+					-fblocks
+	./dump_objc
+
 clean:
 	rm -f calc.o
 	rm -f main.o
 	rm -f main
 	rm -f swift.ast
+	rm -f dump_objc
 

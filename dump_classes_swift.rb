@@ -1,6 +1,6 @@
 require 'sxp'
 
-ast = SXP.read(File.read("swift.ast"))
+ast = SXP.read File.read "swift.ast"
 
 def properties class_def
   class_def.map do |node|
@@ -9,7 +9,7 @@ def properties class_def
 end
 
 ast.each do |node|
-  next unless node[0] == :struct_decl
+  next unless node[0] == :class_decl
   puts "class: #{node[1]}"
   properties(node).each do |p|
     puts " -> #{p}"

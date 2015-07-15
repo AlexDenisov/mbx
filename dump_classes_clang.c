@@ -50,7 +50,7 @@ extern void clang_disposeString(CXString string);
 
 int main(int argc, char *argv[]) {
   CXIndex index = clang_createIndex(0, 1);
-  CXTranslationUnit tu = clang_parseTranslationUnit(index, "clang_ast.m", NULL, 0, NULL, 0, 
+  CXTranslationUnit tu = clang_parseTranslationUnit(index, "ast_clang.m", NULL, 0, NULL, 0, 
                                                     CXTranslationUnit_None);
 
   clang_visitChildrenWithBlock(clang_getTranslationUnitCursor(tu), ^enum CXChildVisitResult (CXCursor cursor, CXCursor parent) {

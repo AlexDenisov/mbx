@@ -6,22 +6,22 @@ linker:
 	ld -macosx_version_min 10.10 -lc calc.o main.o -o main
 	nm main
 
-clang_tokens:
+dump_tokens_clang:
 	clang -cc1 -dump-tokens calc.c
 
-clang_ast:
-	clang -cc1 -ast-dump clang_ast.m
+dump_ast_clang:
+	clang -cc1 -ast-dump ast_clang.m
 
-swift_ast:
-	swiftc -dump-ast swift_ast.swift
+dump_ast_swift:
+	swiftc -dump-ast ast_swift.swift
 
-dump_swift_structs:
-	swiftc -dump-ast swift_ast.swift 2> swift.ast
-	ruby dump_swift_struct.rb
+dump_classes_swift:
+	swiftc -dump-ast ast_swift.swift 2> swift.ast
+	ruby dump_classes_swift.rb
 
 TOOLCHAIN_LIB=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/
-dump_objc_classes:
-	clang dump_objc_classes.c -o dump_objc \
+dump_classes_clang:
+	clang dump_classes_clang.c -o dump_objc \
 					-lclang -L$(TOOLCHAIN_LIB) \
 					-Xlinker -rpath -Xlinker $(TOOLCHAIN_LIB)\
 					-fblocks

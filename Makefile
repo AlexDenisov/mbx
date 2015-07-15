@@ -1,4 +1,4 @@
-linker: clean
+linker:
 	clang -c calc.c -o calc.o
 	clang -c main.c -o main.o
 	nm calc.o
@@ -26,6 +26,12 @@ dump_objc_classes:
 					-Xlinker -rpath -Xlinker $(TOOLCHAIN_LIB)\
 					-fblocks
 	./dump_objc
+
+dump_ir_clang:
+	clang -S -emit-llvm calc.c -o -
+
+dump_ir_swift:
+	swiftc -emit-ir calc.swift
 
 clean:
 	rm -f calc.o

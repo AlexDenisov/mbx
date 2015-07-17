@@ -28,10 +28,12 @@ dump_classes_clang:
 	./dump_objc
 
 dump_ir_clang:
-	clang -S -emit-llvm calc.c -o -
+	clang -S -emit-llvm calc.c -o calc_clang.ll
+	cat calc_clang.ll
 
 dump_ir_swift:
-	swiftc -emit-ir calc.swift
+	swiftc -emit-ir calc.swift -o calc_swift.ll
+	cat calc_swift.ll
 
 clean:
 	rm -f calc.o
